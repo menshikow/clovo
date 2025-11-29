@@ -1,5 +1,4 @@
 # 🔐 Passcheck 
-<div align="center">
 
 [![C](https://img.shields.io/badge/C-17-blue.svg?style=for-the-badge)](https://en.wikipedia.org/wiki/C17_(C_standard_revision))
 [![CMake](https://img.shields.io/badge/CMake-3.15+-064F8C.svg?style=for-the-badge&logo=cmake)](https://cmake.org/)
@@ -8,7 +7,6 @@
 
 • [Installation](#build) • [Usage](#usage) • [Examples](#example)
 
-</div>
 
 ## Build
 ```bash
