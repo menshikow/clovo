@@ -1,9 +1,12 @@
 # 🔐 Passcheck 
 
-[![C](https://img.shields.io/badge/C-17-blue.svg?style=for-the-badge)](https://en.wikipedia.org/wiki/C17_(C_standard_revision))
-[![CMake](https://img.shields.io/badge/CMake-3.15+-064F8C.svg?style=for-the-badge&logo=cmake)](https://cmake.org/)
-[![License](https://img.shields.io/badge/license-MIT-green.svg?style=for-the-badge)](LICENSE)
-[![Platform](https://img.shields.io/badge/platform-Linux%20%7C%20macOS-lightgrey.svg?style=for-the-badge)]()
+**CLI tool to analyze password strength and generate secure passwords** 
+
+[![C17](https://img.shields.io/badge/C-17-blue.svg?style=flat-square)](https://en.wikipedia.org/wiki/C17_(C_standard_revision))
+[![CMake](https://img.shields.io/badge/CMake-3.15+-064F8C.svg?style=flat-square&logo=cmake)](https://cmake.org/)
+[![License](https://img.shields.io/badge/license-MIT-green.svg?style=flat-square)](LICENSE)
+[![Platform](https://img.shields.io/badge/platform-Linux%20%7C%20macOS-lightgrey.svg?style=flat-square)]()
+
 
 • [Installation](#build) • [Usage](#usage) • [Examples](#example)
 
