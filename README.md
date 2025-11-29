@@ -1,22 +1,22 @@
-# 🔐 Passcheck 
+# 🔐 Passcheck
 
-**CLI tool to analyze password strength and generate secure passwords** 
+> **CLI tool to analyze password strength and generate secure passwords**
 
 [![C17](https://img.shields.io/badge/C-17-blue.svg?style=flat-square)](https://en.wikipedia.org/wiki/C17_(C_standard_revision))
 [![CMake](https://img.shields.io/badge/CMake-3.15+-064F8C.svg?style=flat-square&logo=cmake)](https://cmake.org/)
 [![License](https://img.shields.io/badge/license-MIT-green.svg?style=flat-square)](LICENSE)
 [![Platform](https://img.shields.io/badge/platform-Linux%20%7C%20macOS-lightgrey.svg?style=flat-square)]()
 
-
-• [Installation](#build) • [Usage](#usage) • [Examples](#example)
-
+> • [Installation](#build) • [Usage](#usage) • [Examples](#example)
 
 ## Build
+
 ```bash
 cmake -B build && cmake --build build
 ```
 
 ## Usage
+
 ```bash
 # Check a password
 ./build/password_checker "mypassword123"
@@ -34,12 +34,14 @@ cmake -B build && cmake --build build
 - Symbols
 
 Scores passwords from 0-100 and rates them as:
+
 - **VERY WEAK** (0-39)
 - **WEAK** (40-59)
 - **MODERATE** (60-79)
 - **STRONG** (80-100)
 
 ## Example
+
 ```bash
 $ ./build/password_checker "hello"
 
@@ -55,6 +57,7 @@ Rating: VERY WEAK
 ```
 
 ## Running Tests
+
 ```bash
 ./build/test_analyzer
 ./build/test_generator
@@ -64,7 +67,3 @@ Rating: VERY WEAK
 
 - C compiler (gcc or clang)
 - CMake 3.15+
-
-## License
-
-MIT
