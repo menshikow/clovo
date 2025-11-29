@@ -1,4 +1,14 @@
 # 🔐 Passcheck 
+<div align="center">
+
+[![C](https://img.shields.io/badge/C-17-blue.svg?style=for-the-badge)](https://en.wikipedia.org/wiki/C17_(C_standard_revision))
+[![CMake](https://img.shields.io/badge/CMake-3.15+-064F8C.svg?style=for-the-badge&logo=cmake)](https://cmake.org/)
+[![License](https://img.shields.io/badge/license-MIT-green.svg?style=for-the-badge)](LICENSE)
+[![Platform](https://img.shields.io/badge/platform-Linux%20%7C%20macOS-lightgrey.svg?style=for-the-badge)]()
+
+• [Installation](#build) • [Usage](#usage) • [Examples](#example)
+
+</div>
 
 ## Build
 ```bash
@@ -53,15 +63,6 @@ Rating: VERY WEAK
 
 - C compiler (gcc or clang)
 - CMake 3.15+
-
-## Project Structure
-```
-password-checker/
-├── CMakeLists.txt
-├── src/              # source files
-├── include/          # header files
-└── tests/            # test files
-```
 
 ## License
 
