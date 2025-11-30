@@ -25,7 +25,7 @@ typedef struct {
 
 PasswordStrength analyze_password(const char *ps);
 
-void calculate_entropy(PasswordStrength *ps, const char *password);
+void calculate_entropy(PasswordStrength *ps);
 void determine_strength_level(PasswordStrength *ps);
 
 const char *level_to_string(StrengthLevel level);

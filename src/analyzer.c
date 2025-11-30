@@ -30,7 +30,7 @@ PasswordStrength analyze_password(const char *ps) {
     }
   }
 
-  calculate_entropy(&result, ps);
+  calculate_entropy(&result);
   determine_strength_level(&result);
 
   return result;
@@ -42,7 +42,7 @@ entropy = length * log2(pool_size)
 - higher entropy harder to crack
 - pool_size = number of all possible characters
 */
-void calculate_entropy(PasswordStrength *ps, const char *password) {
+void calculate_entropy(PasswordStrength *ps) {
   int pool_size = 0;
 
   if (ps->has_upper)

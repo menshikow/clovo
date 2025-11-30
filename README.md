@@ -162,28 +162,6 @@ test_analyzer.c:46:test_mixed_characters:PASS
 OK
 ```
 
-## Project Structure
-
-```md
-passcheck/
-├── CMakeLists.txt           # Build configuration
-├── include/                 # Header files
-│   ├── analyzer.h
-│   ├── generator.h
-│   ├── validator.h
-│   └── ui.h
-├── src/                     # Source files
-│   ├── main.c
-│   ├── analyzer.c
-│   ├── generator.c
-│   ├── validator.c
-│   └── ui.c
-├── tests/                   # Unit tests
-│   ├── test_analyzer.c
-│   └── test_generator.c
-└── build/                   # Build output (generated)
-```
-
 ## Development
 
 ### Build with Debug Symbols
