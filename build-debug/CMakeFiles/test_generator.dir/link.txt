@@ -1,0 +1,1 @@
+/usr/bin/cc -g CMakeFiles/test_generator.dir/tests/test_generator.c.o -o test_generator  libpwcheck_lib.a _deps/unity-build/libunity.a -lm 

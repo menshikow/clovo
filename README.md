@@ -7,54 +7,66 @@
 [![License](https://img.shields.io/badge/license-MIT-green.svg?style=flat-square)](LICENSE)
 [![Platform](https://img.shields.io/badge/platform-Linux%20%7C%20macOS-lightgrey.svg?style=flat-square)]()
 
-> • [Installation](#build) • [Usage](#usage) • [Examples](#example)
+> • [Installation](#installation) • [Usage](#usage) • [Testing](#testing) • [Examples](#examples)
 
-## Build
+## Installation
 
-#### Normal build
+### Requirements
+
+- C compiler (gcc or clang)
+- CMake 3.15+
+
+### Build from Source
+
+#### Release Build
 
 ```bash
 cmake -B build -DCMAKE_BUILD_TYPE=Release
 cmake --build build
 ```
 
-#### Debug build (for debugging with gdb/LLDB)
+#### Debug Build
 
 ```bash
 cmake -B build-debug -DCMAKE_BUILD_TYPE=Debug
 cmake --build build-debug
 ```
 
-Debug builds include symbols, so you can step through code, inspect variables, and watch memory.
-
-Release builds are optimized and don’t include debug info.
+**Note:** Debug builds include symbols for debugging with gdb/LLDB. Release builds are optimized and don't include debug info.
 
 ## Usage
 
-```bash
-# Check a password
-./build/password_checker "mypassword123"
+### Analyze a Password
 
-# Generate a password
-./build/password_checker --generate 16
+```bash
+./build/password_checker "mypassword123"
 ```
 
-## What It Checks
+### Generate a Secure Password
 
-- Length (at least 8 characters recommended)
-- Lowercase letters
-- Uppercase letters  
-- Numbers
-- Symbols
+```bash
+# Generate 16-character password
+./build/password_checker --generate 16
 
-Scores passwords from 0-100 and rates them as:
+# Generate 24-character password
+./build/password_checker --generate 24
+```
 
-- **VERY WEAK** (0-39)
-- **WEAK** (40-59)
-- **MODERATE** (60-79)
-- **STRONG** (80-100)
+### Strength Levels
 
-## Example
+Passwords are scored from 0-100 and rated as:
+
+| Score    | Rating        | Description                              |
+|----------|---------------|------------------------------------------|
+| 0-29     | VERY WEAK     | Easily crackable, change immediately     |
+| 30-49    | WEAK          | Vulnerable to attacks                    |
+| 50-69    | MEDIUM        | Acceptable for low-security accounts     |
+| 70-84    | STRONG        | Good for most purposes                   |
+| 85-100   | VERY STRONG   | Excellent, highly secure                 |
+
+## Examples
+
+### Weak Password
 
 ```bash
 $ ./build/password_checker "hello"
@@ -65,19 +77,145 @@ Contains lowercase: ✓
 Contains uppercase: ✗
 Contains digits: ✗
 Contains symbols: ✗
-
+Entropy: 23.5 bits
 Strength Score: 15/100
 Rating: VERY WEAK
+
+⚠️  Recommendations:
+  - Use at least 8 characters
+  - Add uppercase letters
+  - Add numbers
+  - Add symbols
 ```
 
-## Running Tests
+### Strong Password
 
 ```bash
+$ ./build/password_checker "MyS3cur3P@ssw0rd!"
+
+=== PASSWORD ANALYSIS ===
+Length: 16 characters
+Contains lowercase: ✓
+Contains uppercase: ✓
+Contains digits: ✓
+Contains symbols: ✓
+Entropy: 95.2 bits
+Strength Score: 95/100
+Rating: VERY STRONG
+
+✓ Excellent password!
+```
+
+### Generate Password
+
+```bash
+$ ./build/password_checker --generate 16
+
+Generated Password: K7$mP2@nX9#qL4vR
+Strength Score: 92/100
+Rating: VERY STRONG
+```
+
+## Testing
+
+The project includes comprehensive unit tests using the [Unity](https://github.com/ThrowTheSwitch/Unity) testing framework.
+
+### Run All Tests
+
+```bash
+# Option 1: Using CTest
+cd build
+ctest --output-on-failure
+
+# Option 2: Using make target
+make run_tests
+
+# Option 3: Run individually
 ./build/test_analyzer
 ./build/test_generator
 ```
 
-## Requirements
+### Run Specific Tests
 
-- C compiler (gcc or clang)
-- CMake 3.15+
+```bash
+# Analyzer tests only
+cd build
+make run_analyzer_tests
+
+# Generator tests only
+make run_generator_tests
+```
+
+### Test Output Example
+
+```bash
+$ ./build/test_analyzer
+
+test_analyzer.c:15:test_null_password:PASS
+test_analyzer.c:23:test_empty_password:PASS
+test_analyzer.c:30:test_lowercase_only:PASS
+test_analyzer.c:38:test_uppercase_only:PASS
+test_analyzer.c:46:test_mixed_characters:PASS
+...
+-----------------------
+35 Tests 0 Failures 0 Ignored 
+OK
+```
+
+## Project Structure
+
+```md
+passcheck/
+├── CMakeLists.txt           # Build configuration
+├── include/                 # Header files
+│   ├── analyzer.h
+│   ├── generator.h
+│   ├── validator.h
+│   └── ui.h
+├── src/                     # Source files
+│   ├── main.c
+│   ├── analyzer.c
+│   ├── generator.c
+│   ├── validator.c
+│   └── ui.c
+├── tests/                   # Unit tests
+│   ├── test_analyzer.c
+│   └── test_generator.c
+└── build/                   # Build output (generated)
+```
+
+## Development
+
+### Build with Debug Symbols
+
+```bash
+cmake -B build-debug -DCMAKE_BUILD_TYPE=Debug
+cmake --build build-debug
+
+# Debug with gdb
+gdb ./build-debug/password_checker
+```
+
+### Clean Build
+
+```bash
+rm -rf build
+cmake -B build -DCMAKE_BUILD_TYPE=Release
+cmake --build build
+```
+
+## Dependencies
+
+- **Unity** (testing framework) - Automatically fetched during build via CMake FetchContent
+- **math.h** (standard C library) - For entropy calculations
+
+No manual dependency installation required!
+
+## License
+
+MIT License [LICENSE](LICENSE)
+
+## Acknowledgments
+
+- [Unity Test Framework](https://github.com/ThrowTheSwitch/Unity) - Excellent C testing framework
+- Password strength algorithms based on NIST guidelines

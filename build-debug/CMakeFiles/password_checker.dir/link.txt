@@ -1,0 +1,1 @@
+/usr/bin/cc -g CMakeFiles/password_checker.dir/src/main.c.o -o password_checker  libpwcheck_lib.a -lm 

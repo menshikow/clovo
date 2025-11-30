@@ -1,0 +1,50 @@
+[
+{
+  "directory": "/home/menschikov/dev/passcheck/build-debug",
+  "command": "/usr/bin/cc  -I/home/menschikov/dev/passcheck/include -g -std=gnu17 -Wall -Wextra -o CMakeFiles/pwcheck_lib.dir/src/analyzer.c.o -c /home/menschikov/dev/passcheck/src/analyzer.c",
+  "file": "/home/menschikov/dev/passcheck/src/analyzer.c",
+  "output": "CMakeFiles/pwcheck_lib.dir/src/analyzer.c.o"
+},
+{
+  "directory": "/home/menschikov/dev/passcheck/build-debug",
+  "command": "/usr/bin/cc  -I/home/menschikov/dev/passcheck/include -g -std=gnu17 -Wall -Wextra -o CMakeFiles/pwcheck_lib.dir/src/generator.c.o -c /home/menschikov/dev/passcheck/src/generator.c",
+  "file": "/home/menschikov/dev/passcheck/src/generator.c",
+  "output": "CMakeFiles/pwcheck_lib.dir/src/generator.c.o"
+},
+{
+  "directory": "/home/menschikov/dev/passcheck/build-debug",
+  "command": "/usr/bin/cc  -I/home/menschikov/dev/passcheck/include -g -std=gnu17 -Wall -Wextra -o CMakeFiles/pwcheck_lib.dir/src/validator.c.o -c /home/menschikov/dev/passcheck/src/validator.c",
+  "file": "/home/menschikov/dev/passcheck/src/validator.c",
+  "output": "CMakeFiles/pwcheck_lib.dir/src/validator.c.o"
+},
+{
+  "directory": "/home/menschikov/dev/passcheck/build-debug",
+  "command": "/usr/bin/cc  -I/home/menschikov/dev/passcheck/include -g -std=gnu17 -Wall -Wextra -o CMakeFiles/pwcheck_lib.dir/src/ui.c.o -c /home/menschikov/dev/passcheck/src/ui.c",
+  "file": "/home/menschikov/dev/passcheck/src/ui.c",
+  "output": "CMakeFiles/pwcheck_lib.dir/src/ui.c.o"
+},
+{
+  "directory": "/home/menschikov/dev/passcheck/build-debug",
+  "command": "/usr/bin/cc   -g -std=gnu17 -Wall -Wextra -o CMakeFiles/password_checker.dir/src/main.c.o -c /home/menschikov/dev/passcheck/src/main.c",
+  "file": "/home/menschikov/dev/passcheck/src/main.c",
+  "output": "CMakeFiles/password_checker.dir/src/main.c.o"
+},
+{
+  "directory": "/home/menschikov/dev/passcheck/build-debug",
+  "command": "/usr/bin/cc  -I/home/menschikov/dev/passcheck/include -I/home/menschikov/dev/passcheck/build-debug/_deps/unity-src/src -I/home/menschikov/dev/passcheck/build-debug/_deps/unity-build -g -std=gnu17 -Wall -Wextra -o CMakeFiles/test_analyzer.dir/tests/test_analyzer.c.o -c /home/menschikov/dev/passcheck/tests/test_analyzer.c",
+  "file": "/home/menschikov/dev/passcheck/tests/test_analyzer.c",
+  "output": "CMakeFiles/test_analyzer.dir/tests/test_analyzer.c.o"
+},
+{
+  "directory": "/home/menschikov/dev/passcheck/build-debug",
+  "command": "/usr/bin/cc  -I/home/menschikov/dev/passcheck/include -I/home/menschikov/dev/passcheck/build-debug/_deps/unity-src/src -I/home/menschikov/dev/passcheck/build-debug/_deps/unity-build -g -std=gnu17 -Wall -Wextra -o CMakeFiles/test_generator.dir/tests/test_generator.c.o -c /home/menschikov/dev/passcheck/tests/test_generator.c",
+  "file": "/home/menschikov/dev/passcheck/tests/test_generator.c",
+  "output": "CMakeFiles/test_generator.dir/tests/test_generator.c.o"
+},
+{
+  "directory": "/home/menschikov/dev/passcheck/build-debug/_deps/unity-build",
+  "command": "/usr/bin/cc  -I/home/menschikov/dev/passcheck/build-debug/_deps/unity-src/src -I/home/menschikov/dev/passcheck/build-debug/_deps/unity-build -g -std=c11 -Wall -Wextra -Waddress -Waggregate-return -Wformat-nonliteral -Wformat-security -Wformat -Winit-self -Wmissing-declarations -Wmissing-include-dirs -Wno-multichar -Wno-parentheses -Wno-type-limits -Wno-unused-parameter -Wunreachable-code -Wwrite-strings -Wpointer-arith -Werror -o CMakeFiles/unity.dir/src/unity.c.o -c /home/menschikov/dev/passcheck/build-debug/_deps/unity-src/src/unity.c",
+  "file": "/home/menschikov/dev/passcheck/build-debug/_deps/unity-src/src/unity.c",
+  "output": "_deps/unity-build/CMakeFiles/unity.dir/src/unity.c.o"
+}
+]

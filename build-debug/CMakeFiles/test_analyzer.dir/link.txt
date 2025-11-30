@@ -1,0 +1,1 @@
+/usr/bin/cc -g CMakeFiles/test_analyzer.dir/tests/test_analyzer.c.o -o test_analyzer  libpwcheck_lib.a _deps/unity-build/libunity.a -lm 
