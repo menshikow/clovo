@@ -37,6 +37,7 @@ dkms.conf
 
 # Build directories
 build/
+build-debug/
 cmake-build-debug/
 bin/
 
