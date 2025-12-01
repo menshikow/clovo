@@ -1,0 +1,4 @@
+1) https://github.com/danielmiessler/SecLists/blob/master/Passwords/Common-Credentials/100k-most-used-passwords-NCSC.txt
+2) dictionary_words.txt       # English dictionary  
+4) patterns.txt              # Weak password patterns 
+

@@ -9,7 +9,7 @@ typedef enum {
   MEDIUM,
   STRONG,
   VERY_STRONG
-} StrengthLevel;
+} strength_level_t;
 
 typedef struct {
   int score;
@@ -20,14 +20,14 @@ typedef struct {
   bool has_upper;
   bool has_digit;
   bool has_symbol;
-  StrengthLevel level;
-} PasswordStrength;
+  strength_level_t level;
+} password_strength_t;
 
-PasswordStrength analyze_password(const char *ps);
+password_strength_t analyze_password(const char *ps);
 
-void calculate_entropy(PasswordStrength *ps);
-void determine_strength_level(PasswordStrength *ps);
+void calculate_entropy(password_strength_t *ps);
+void determine_strength_level(password_strength_t *ps);
 
-const char *level_to_string(StrengthLevel level);
+const char *level_to_string(password_strength_t level);
 
 #endif
