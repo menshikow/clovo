@@ -6,8 +6,8 @@
 #include <stdio.h>
 #include <string.h>
 
-PasswordStrength analyze_password(const char *ps) {
-  PasswordStrength result = {0};
+password_strength_t analyze_password(const char *ps) {
+  password_strength_t result = {0};
 
   if (ps == NULL) {
     result.level = NO_PASSWORD;
@@ -42,7 +42,7 @@ entropy = length * log2(pool_size)
 - higher entropy harder to crack
 - pool_size = number of all possible characters
 */
-void calculate_entropy(PasswordStrength *ps) {
+void calculate_entropy(password_strength_t *ps) {
   int pool_size = 0;
 
   if (ps->has_upper)
@@ -68,7 +68,7 @@ scoring logic based on:
 - entropy (0-20 p)
 total = 0-100 p
 */
-void determine_strength_level(PasswordStrength *ps) {
+void determine_strength_level(password_strength_t *ps) {
   ps->score = 0;
 
   // length scoring
@@ -125,7 +125,7 @@ void determine_strength_level(PasswordStrength *ps) {
 }
 
 // helper function
-const char *level_to_string(StrengthLevel level) {
+const char *level_to_string(strength_level_t level) {
   switch (level) {
   case NO_PASSWORD:
     return "No Password";

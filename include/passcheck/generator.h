@@ -7,12 +7,13 @@
 // error codes
 typedef enum {
   GEN_SUCCESS = 0,
-  GEN_ERROR_INVALID_LENGTH = -1,
-  GEN_ERROR_NO_CHARSET = -2,
-  GEN_ERROR_BUFFER_TOO_SMALL = -3,
-  GEN_ERROR_RANDOM_FAILED = -4,
-  GEN_ERROR_COMMON_PASSWORD = -5,
-  GEN_ERROR_NULL_POINTER = -6
+  GEN_ERROR_NULL_POINTER = -1,
+  GEN_ERROR_INVALID_LENGTH = -2,
+  GEN_ERROR_NO_CHARSET = -3,
+  GEN_ERROR_BUFFER_TOO_SMALL = -4,
+  GEN_ERROR_RANDOM_FAILED = -5,
+  GEN_ERROR_COMMON_PASSWORD = -6,
+  GEN_ERROR_FILE_ACCESS = -7
 } generator_error_t;
 
 // generation options
@@ -21,9 +22,16 @@ typedef struct {
   size_t max_length;
   bool include_lowercase;
   bool include_uppercase;
+  bool include_digits;
   bool include_symbols;
   bool check_common;
 } generator_options_t;
+
+// load common passwords from file
+generator_error_t load_common_passwords(const char *filepath);
+
+// free common passwords list
+void free_common_passwords(void);
 
 // default compliant options
 void init_generator_options(generator_options_t *opts);
