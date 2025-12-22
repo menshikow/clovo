@@ -29,8 +29,10 @@ FetchContent_MakeAvailable(unity)
 add_library(pwcheck_lib STATIC
     src/analyzer.c
     src/generator.c
-    src/validator.c
     src/ui.c
+    src/policy.c
+    src/comparison.c
+    src/export.c
 )
 
 # Include the headers
@@ -43,6 +45,7 @@ target_link_libraries(pwcheck_lib PRIVATE m)
 # Build Main Program
 # ============================================
 add_executable(password_checker src/main.c)
+target_include_directories(password_checker PRIVATE ${CMAKE_SOURCE_DIR}/include)
 target_link_libraries(password_checker PRIVATE pwcheck_lib)
 
 # ============================================

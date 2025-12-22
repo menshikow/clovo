@@ -19,17 +19,17 @@
 #include <unistd.h>
 #endif
 
-// character sets
+// character sets we use for password generation
 static const char LOWERCASE[] = "abcdefghijklmnopqrstuvwxyz";
 static const char UPPERCASE[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 static const char SYMBOLS[] = "!@#$%^&*()_+-=[]{}|;:,.<>?/~`";
 static const char DIGITS[] = "0123456789";
 
-// common passwords loaded from file
+// common passwords loaded from file, keep track of them here
 static char **common_passwords_list = NULL;
 static size_t common_passwords_count = 0;
 
-// random byte generation
+// get random bytes from system, different methods for different platforms
 static int get_random_bytes(unsigned char *buffer, size_t size) {
 #ifdef _WIN32
   NTSTATUS status = BCryptGenRandom(NULL, buffer, (ULONG)size,
@@ -64,7 +64,7 @@ static int get_random_bytes(unsigned char *buffer, size_t size) {
   return (bytes_read == size) ? 0 : -1;
 
 #else
-  // macOS, BSD, fallback to /dev/urandom
+  // macos/bsd fallback to /dev/urandom
   FILE *fp = fopen("/dev/urandom", "rb");
   if (!fp)
     return -1;
@@ -74,7 +74,7 @@ static int get_random_bytes(unsigned char *buffer, size_t size) {
 #endif
 }
 
-// load common passwords
+// load common passwords from file into memory
 generator_error_t load_common_passwords(const char *filepath) {
   FILE *file = fopen(filepath, "r");
   if (!file) {
@@ -120,11 +120,11 @@ generator_error_t load_common_passwords(const char *filepath) {
 
   common_passwords_count = index;
   fclose(file);
-  printf("Loaded %zu common passwords\n", common_passwords_count);
+  // loaded silently, no need to spam the user
   return GEN_SUCCESS;
 }
 
-// free common passwords
+// free the common passwords list from memory
 void free_common_passwords(void) {
   if (common_passwords_list) {
     for (size_t i = 0; i < common_passwords_count; i++)
@@ -135,7 +135,7 @@ void free_common_passwords(void) {
   }
 }
 
-// initialize generator options
+// set up default generator options
 void init_generator_options(generator_options_t *opts) {
   if (!opts)
     return;
@@ -162,7 +162,7 @@ generator_error_t init_generator(const char *data_dir) {
 
 void cleanup_generator(void) { free_common_passwords(); }
 
-// generation logic
+// main password generation logic
 generator_error_t generate_password(char *buffer, size_t buffer_size,
                                     size_t length,
                                     const generator_options_t *opts) {
@@ -236,7 +236,7 @@ generator_error_t generate_password(char *buffer, size_t buffer_size,
   return status;
 }
 
-// check common passwords
+// check if password is in the common passwords list
 bool is_common_password(const char *ps) {
   if (!ps)
     return false;
@@ -266,7 +266,7 @@ bool is_common_password(const char *ps) {
   return false;
 }
 
-// error string helper
+// convert error code to readable string
 const char *generator_error_string(generator_error_t error) {
   switch (error) {
   case GEN_SUCCESS:
@@ -288,4 +288,81 @@ const char *generator_error_string(generator_error_t error) {
   default:
     return "Unknown error";
   }
+}
+
+// common word list for passphrase generation
+static const char *passphrase_words[] = {
+    "apple",    "banana",   "cherry",   "dragon",    "eagle",     "forest",
+    "garden",   "hammer",   "island",   "jungle",    "knight",    "lighthouse",
+    "mountain", "ocean",    "planet",   "quasar",    "river",     "sunset",
+    "tiger",    "universe", "valley",   "waterfall", "xylophone", "yacht",
+    "zebra",    "anchor",   "bridge",   "castle",    "diamond",   "elephant",
+    "falcon",   "galaxy",   "horizon",  "igloo",     "jaguar",    "kangaroo",
+    "leopard",  "mermaid",  "nebula",   "octopus",   "penguin",   "quill",
+    "rainbow",  "sapphire", "tornado",  "umbrella",  "volcano",   "whale",
+    "xenon",    "yogurt",   "zeppelin", NULL};
+
+// generate passphrase (multiple words)
+generator_error_t generate_passphrase(char *buffer, size_t buffer_size,
+                                      int word_count,
+                                      const generator_options_t *opts) {
+  if (!buffer)
+    return GEN_ERROR_NULL_POINTER;
+
+  if (word_count < 2 || word_count > 10) {
+    return GEN_ERROR_INVALID_LENGTH;
+  }
+
+  // count available words
+  int word_list_size = 0;
+  while (passphrase_words[word_list_size] != NULL) {
+    word_list_size++;
+  }
+
+  if (word_list_size == 0) {
+    return GEN_ERROR_NO_CHARSET;
+  }
+
+  // estimate max length needed
+  size_t max_length =
+      (word_count * 15) + word_count; // 15 chars per word + separators
+  if (buffer_size < max_length + 1) {
+    return GEN_ERROR_BUFFER_TOO_SMALL;
+  }
+
+  // get random bytes for word selection
+  unsigned char random_bytes[10];
+  if (get_random_bytes(random_bytes, word_count) != 0) {
+    return GEN_ERROR_RANDOM_FAILED;
+  }
+
+  buffer[0] = '\0';
+
+  for (int i = 0; i < word_count; i++) {
+    int word_index = random_bytes[i] % word_list_size;
+    const char *word = passphrase_words[word_index];
+
+    if (i > 0) {
+      strcat(buffer, "-");
+    }
+    strcat(buffer, word);
+  }
+
+  // check if generated passphrase is too common
+  if (opts && opts->check_common && is_common_password(buffer)) {
+    // try once more
+    buffer[0] = '\0';
+    if (get_random_bytes(random_bytes, word_count) != 0) {
+      return GEN_ERROR_RANDOM_FAILED;
+    }
+    for (int i = 0; i < word_count; i++) {
+      int word_index = random_bytes[i] % word_list_size;
+      const char *word = passphrase_words[word_index];
+      if (i > 0)
+        strcat(buffer, "-");
+      strcat(buffer, word);
+    }
+  }
+
+  return GEN_SUCCESS;
 }

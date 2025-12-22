@@ -53,4 +53,9 @@ void cleanup_generator(void);
 // get error message
 const char *generator_error_string(generator_error_t err);
 
+// generate passphrase (multiple words)
+generator_error_t generate_passphrase(char *buffer, size_t buffer_size,
+                                      int word_count,
+                                      const generator_options_t *opts);
+
 #endif
